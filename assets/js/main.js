@@ -1,11 +1,3 @@
-/**
-* Template Name: Medilab
-* Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
-* Updated: Aug 07 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 (function() {
   "use strict";
 
@@ -16,7 +8,16 @@
     const selectBody = document.querySelector('body');
     const selectHeader = document.querySelector('#header');
     if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
-    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
+//    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
+    if (window.scrollY > 110) {
+      if (!selectBody.classList.contains('scrolled')) {
+        selectBody.classList.add('scrolled');
+      }
+    } else if (window.scrollY < 90) {
+      if (selectBody.classList.contains('scrolled')) {
+        selectBody.classList.remove('scrolled');
+      }
+    }
   }
 
   document.addEventListener('scroll', toggleScrolled);
@@ -169,6 +170,7 @@
     navmenulinks.forEach(navmenulink => {
       if (navmenulink.getAttribute('href') === '#' && window.scrollY < 200) {
         document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
+        document.querySelector('.navmenu a[href="#"]').classList.add('active');
         navmenulink.classList.add('active');
         return;
       }  
@@ -186,20 +188,5 @@
   }
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const homeLink = document.querySelector('.navmenu a[href="#"]');
-    if (homeLink) {
-      homeLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
-        homeLink.classList.add('active');
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-    }
-  });
 
 })();
