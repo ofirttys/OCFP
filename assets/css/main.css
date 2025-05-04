@@ -910,9 +910,9 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# TOP Section
 --------------------------------------------------------------*/
-.hero {
+.top {
   width: 100%;
   min-height: calc(100vh - 112px);
   padding: 80px 0;
@@ -923,7 +923,7 @@ section,
   overflow: hidden;
 }
 
-.hero img {
+.top img {
   position: absolute;
   inset: 0;
   display: block;
@@ -933,44 +933,44 @@ section,
   z-index: 1;
 }
 
-.hero .container {
+.top .container {
   z-index: 3;
 }
 
-.hero .welcome h2 {
+.top .welcome h2 {
   margin: 0;
   font-size: 48px;
   font-weight: 700;
 }
 
-.hero .welcome p {
+.top .welcome p {
   font-size: 24px;
   margin: 0;
 }
 
-.hero .content {
+.top .content {
   margin-top: 40px;
 }
 
-.hero .content .why-box {
+.top .content .why-box {
   color: var(--contrast-color);
   background: var(--accent-color);
   padding: 30px;
   border-radius: 4px;
 }
 
-.hero .content .why-box h3 {
+.top .content .why-box h3 {
   color: var(--contrast-color);
   font-weight: 700;
   font-size: 34px;
   margin-bottom: 30px;
 }
 
-.hero .content .why-box p {
+.top .content .why-box p {
   margin-bottom: 30px;
 }
 
-.hero .content .why-box .more-btn {
+.top .content .why-box .more-btn {
   color: var(--contrast-color);
   background: color-mix(in srgb, var(--contrast-color), transparent 80%);
   display: inline-block;
@@ -979,16 +979,16 @@ section,
   transition: all ease-in-out 0.4s;
 }
 
-.hero .content .why-box .more-btn i {
+.top .content .why-box .more-btn i {
   font-size: 14px;
 }
 
-.hero .content .why-box .more-btn:hover {
+.top .content .why-box .more-btn:hover {
   background: var(--surface-color);
   color: var(--accent-color);
 }
 
-.hero .content .icon-box {
+.top .content .icon-box {
   text-align: center;
   border-radius: 10px;
   background: color-mix(in srgb, var(--surface-color), transparent 20%);
@@ -997,18 +997,18 @@ section,
   width: 100%;
 }
 
-.hero .content .icon-box i {
+.top .content .icon-box i {
   font-size: 40px;
   color: var(--accent-color);
 }
 
-.hero .content .icon-box h4 {
+.top .content .icon-box h4 {
   font-size: 20px;
   font-weight: 700;
   margin: 10px 0 20px 0;
 }
 
-.hero .content .icon-box p {
+.top .content .icon-box p {
   font-size: 15px;
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
