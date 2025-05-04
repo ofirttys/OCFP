@@ -9,7 +9,7 @@
     const selectHeader = document.querySelector('#header');
     if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
 //    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
-    if (window.scrollY > 110) {
+    if (window.scrollY > 150) {
       if (!selectBody.classList.contains('scrolled')) {
         selectBody.classList.add('scrolled');
       }
