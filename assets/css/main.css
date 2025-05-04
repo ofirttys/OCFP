@@ -956,6 +956,9 @@ section,
 
 .top .content .why-box p {
   margin-bottom: 30px;
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
 .top .content .why-box .more-btn {
