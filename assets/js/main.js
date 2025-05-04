@@ -167,6 +167,11 @@
 
   function navmenuScrollspy() {
     navmenulinks.forEach(navmenulink => {
+      if (navmenulink.getAttribute('href') === '#' && window.scrollY < 200) {
+        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
+        navmenulink.classList.add('active');
+        return;
+      }  
       if (!navmenulink.hash) return;
       let section = document.querySelector(navmenulink.hash);
       if (!section) return;
@@ -181,5 +186,20 @@
   }
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const homeLink = document.querySelector('.navmenu a[href="#"]');
+    if (homeLink) {
+      homeLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
+        homeLink.classList.add('active');
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  });
 
 })();
