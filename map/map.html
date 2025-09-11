@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ontario Ovarian Tissue Cryopreservation Centre of Excellence - Interactive Map</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        #map {
+            height: 600px;
+            border-radius: 10px;
+            border: 2px solid #e1e8ed;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 15px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .legend-circle {
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border: 2px solid white;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        /* Custom marker styles */
+        .custom-marker {
+            border-radius: 50%;
+            border: 1px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+            font-size: 14px;
+        }
+        
+        .marker-high {
+            background: rgba(192, 57, 43, 0.5);
+            width: 50px;
+            height: 50px;
+            font-size: 16px;
+        }
+        
+        .marker-medium {
+            background: rgba(230, 126, 34, 0.5);
+            width: 35px;
+            height: 35px;
+            font-size: 14px;
+        }
+        
+        .marker-low {
+            background: rgba(52, 152, 219, 0.5);
+            width: 25px;
+            height: 25px;
+            font-size: 12px;
+        }
+        
+        /* Popup styling */
+        .custom-popup {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .popup-title {
+            font-weight: bold;
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .popup-cases {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .popup-share {
+            color: #3498db;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ontario Ovarian Tissue Cryopreservation Centre of Excellence</h1>
+        <p class="subtitle">Interactive Geographic Distribution of OTC Case referrals</p>
+        
+        <div id="map"></div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-circle marker-high" style="width: 35px; height: 35px;"></div>
+                <span><strong>High Volume</strong> (10+ cases)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-circle marker-medium" style="width: 28px; height: 28px;"></div>
+                <span><strong>Medium Volume</strong> (4-9 cases)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-circle marker-low" style="width: 22px; height: 22px;"></div>
+                <span><strong>Low Volume</strong> (1-3 cases)</span>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">28</div>
+                <div class="stat-label">Total Cases</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Active Locations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">70%</div>
+                <div class="stat-label">Greater Toronto Area</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">46%</div>
+                <div class="stat-label">SickKids Hospital</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    
+    <script>
+        // Initialize the map centered on Southern Ontario
+        const map = L.map('map').setView([44.0, -79.5], 7);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        const cities = [
+            {
+                name: "Toronto (SickKids)",
+                lat: 43.6575,
+                lng: -79.3875,
+                cases: 13,
+                type: "high"
+            },
+            {
+                name: "Toronto (PMH)",
+                lat: 43.6959,
+                lng: -79.4497,
+                cases: 5,
+                type: "medium"
+            },
+            {
+                name: "London",
+                lat: 42.9849,
+                lng: -81.2453,
+                cases: 4,
+                type: "medium"
+            },
+            {
+                name: "Ottawa",
+                lat: 45.4215,
+                lng: -75.6972,
+                cases: 2,
+                type: "low"
+            },
+            {
+                name: "Hamilton",
+                lat: 43.2552,
+                lng: -79.8708,
+                cases: 1,
+                type: "low"
+            },
+            {
+                name: "Newmarket",
+                lat: 44.0592,
+                lng: -79.4613,
+                cases: 1,
+                type: "low"
+            },
+            {
+                name: "Mississauga",
+                lat: 43.5890,
+                lng: -79.6441,
+                cases: 1,
+                type: "low"
+            },
+            {
+                name: "Peterborough",
+                lat: 44.3091,
+                lng: -78.3197,
+                cases: 1,
+                type: "low"
+            }
+        ];
+
+        const totalCases = cities.reduce((sum, city) => sum + city.cases, 0);
+
+        function createCustomMarker(city) {
+            const markerClass = `marker-${city.type}`;
+            const markerSize = city.type === 'high' ? [50, 50] : 
+                              city.type === 'medium' ? [35, 35] : [25, 25];
+            
+            const icon = L.divIcon({
+                className: 'custom-marker',
+                html: `<div class="custom-marker ${markerClass}">${city.cases}</div>`,
+                iconSize: markerSize,
+                iconAnchor: [markerSize[0]/2, markerSize[1]/2],
+                popupAnchor: [0, -markerSize[1]/2]
+            });
+
+            return icon;
+        }
+
+        // Force map to invalidate size and reposition markers correctly
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 100);
+
+        // Add markers for each city
+        cities.forEach(city => {
+            const percentage = ((city.cases / totalCases) * 100).toFixed(1);
+            
+            const marker = L.marker([city.lat, city.lng], {
+                icon: createCustomMarker(city)
+            }).addTo(map);
+
+            // Create popup content
+            const popupContent = `
+                <div class="custom-popup">
+                    <div class="popup-title">${city.name}</div>
+                    <div class="popup-cases">Cases: ${city.cases}</div>
+                    <div class="popup-share">Share: ${percentage}% of total</div>
+                </div>
+            `;
+
+            marker.bindPopup(popupContent);
+        });
+/*
+        // Add coordinate picker for easy adjustment
+        let coordDisplay = L.control({position: 'bottomleft'});
+        coordDisplay.onAdd = function(map) {
+            this._div = L.DomUtil.create('div', 'coord-display');
+            this._div.innerHTML = '<div style="background: white; padding: 5px; border-radius: 4px; border: 1px solid #ccc; font-size: 12px;">Click on map to get coordinates</div>';
+            return this._div;
+        };
+        coordDisplay.addTo(map);
+        
+        // Show coordinates when clicking on map
+        map.on('click', function(e) {
+            const lat = e.latlng.lat.toFixed(4);
+            const lng = e.latlng.lng.toFixed(4);
+            coordDisplay._div.innerHTML = `<div style="background: white; padding: 5px; border-radius: 4px; border: 1px solid #ccc; font-size: 12px;"><strong>Coordinates:</strong><br>lat: ${lat}<br>lng: ${lng}</div>`;
+            console.log(`Coordinates: lat: ${lat}, lng: ${lng}`);
+        });
+*/
+        // Remove the animation to avoid positioning conflicts
+        // Fit map to show all markers with proper bounds
+        const group = new L.featureGroup(cities.map(city => 
+            L.marker([city.lat, city.lng])
+        ));
+        
+        // Set bounds with padding after a brief delay to ensure markers are rendered
+        setTimeout(() => {
+            map.fitBounds(group.getBounds().pad(0.15));
+        }, 200);
+    </script>
+</body>
+</html>
