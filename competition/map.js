@@ -175,9 +175,9 @@ function initializeMap() {
     // }).addTo(map);
     
     // Option 3: OpenTopoMap - shows terrain and roads clearly
-    // L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-    //     attribution: '© OpenTopoMap, © OpenStreetMap contributors'
-    // }).addTo(map);
+    L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenTopoMap, © OpenStreetMap contributors'
+    }).addTo(map);
     
     // Draw TTC Line 1
     drawTTCLine1(map);
