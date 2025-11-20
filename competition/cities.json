@@ -1,0 +1,66 @@
+[
+    {
+        "name": "Toronto (SickKids)",
+        "lat": 43.6575,
+        "lng": -79.3875,
+        "cases": 13,
+        "type": "high",
+        "region": "GTA"
+    },
+    {
+        "name": "Toronto (PMH)",
+        "lat": 43.6959,
+        "lng": -79.4497,
+        "cases": 5,
+        "type": "medium",
+        "region": "GTA"
+    },
+    {
+        "name": "London",
+        "lat": 42.9849,
+        "lng": -81.2453,
+        "cases": 4,
+        "type": "medium",
+        "region": "Other"
+    },
+    {
+        "name": "Ottawa",
+        "lat": 45.4215,
+        "lng": -75.6972,
+        "cases": 2,
+        "type": "low",
+        "region": "Other"
+    },
+    {
+        "name": "Hamilton",
+        "lat": 43.2552,
+        "lng": -79.8708,
+        "cases": 1,
+        "type": "low",
+        "region": "Other"
+    },
+    {
+        "name": "Newmarket",
+        "lat": 44.0592,
+        "lng": -79.4613,
+        "cases": 1,
+        "type": "low",
+        "region": "GTA"
+    },
+    {
+        "name": "Mississauga",
+        "lat": 43.5890,
+        "lng": -79.6441,
+        "cases": 1,
+        "type": "low",
+        "region": "GTA"
+    },
+    {
+        "name": "Peterborough",
+        "lat": 44.3091,
+        "lng": -78.3197,
+        "cases": 1,
+        "type": "low",
+        "region": "Other"
+    }
+]
