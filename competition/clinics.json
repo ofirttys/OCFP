@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Mount Sinai Fertility - Main",
+        "address": "250 Dundas Street West, Toronto, ON",
+        "lat": 43.6565,
+        "lng": -79.3876,
+        "physicians": 8,
+        "clinicGroup": "mount-sinai",
+        "type": "high"
+    },
+    {
+        "name": "Mount Sinai Fertility - North",
+        "address": "123 Example Street, North York, ON",
+        "lat": 43.7615,
+        "lng": -79.4110,
+        "physicians": 3,
+        "clinicGroup": "mount-sinai",
+        "type": "medium"
+    },
+    {
+        "name": "ReproMed Fertility - Downtown",
+        "address": "456 Bay Street, Toronto, ON",
+        "lat": 43.6532,
+        "lng": -79.3832,
+        "physicians": 5,
+        "clinicGroup": "repromed",
+        "type": "medium"
+    },
+    {
+        "name": "TRIO Fertility - Toronto",
+        "address": "655 Bay Street, Toronto, ON",
+        "lat": 43.6625,
+        "lng": -79.3855,
+        "physicians": 6,
+        "clinicGroup": "trio",
+        "type": "medium"
+    },
+    {
+        "name": "ONE Fertility - Mississauga",
+        "address": "2150 Burnhamthorpe Road West, Mississauga, ON",
+        "lat": 43.5890,
+        "lng": -79.6441,
+        "physicians": 4,
+        "clinicGroup": "one-fertility",
+        "type": "medium"
+    },
+    {
+        "name": "Create Fertility - Toronto",
+        "address": "790 Bay Street, Toronto, ON",
+        "lat": 43.6680,
+        "lng": -79.3870,
+        "physicians": 3,
+        "clinicGroup": "create",
+        "type": "low"
+    }
+]

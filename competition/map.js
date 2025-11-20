@@ -1,18 +1,70 @@
-let cities = [];
+let clinics = [];
 
-// Load cities data from JSON file
-async function loadCitiesData() {
+// TTC Line 1 (Yonge-University) station coordinates
+const ttcLine1Stations = [
+    { name: "Vaughan Metropolitan Centre", lat: 43.7956, lng: -79.5245 },
+    { name: "Highway 407", lat: 43.7789, lng: -79.5287 },
+    { name: "Pioneer Village", lat: 43.7733, lng: -79.5030 },
+    { name: "York University", lat: 43.7735, lng: -79.5025 },
+    { name: "Finch West", lat: 43.7658, lng: -79.4935 },
+    { name: "Downsview Park", lat: 43.7532, lng: -79.4782 },
+    { name: "Sheppard West", lat: 43.7489, lng: -79.4697 },
+    { name: "Wilson", lat: 43.7354, lng: -79.4501 },
+    { name: "Yorkdale", lat: 43.7250, lng: -79.4478 },
+    { name: "Lawrence West", lat: 43.7165, lng: -79.4429 },
+    { name: "Glencairn", lat: 43.7090, lng: -79.4402 },
+    { name: "Eglinton West", lat: 43.6988, lng: -79.4354 },
+    { name: "St. Clair West", lat: 43.6839, lng: -79.4287 },
+    { name: "Dupont", lat: 43.6744, lng: -79.4069 },
+    { name: "Spadina", lat: 43.6673, lng: -79.4044 },
+    { name: "St. George", lat: 43.6681, lng: -79.3999 },
+    { name: "Museum", lat: 43.6677, lng: -79.3933 },
+    { name: "Queen's Park", lat: 43.6660, lng: -79.3906 },
+    { name: "St. Patrick", lat: 43.6547, lng: -79.3888 },
+    { name: "Osgoode", lat: 43.6507, lng: -79.3869 },
+    { name: "King", lat: 43.6491, lng: -79.3779 },
+    { name: "Union", lat: 43.6453, lng: -79.3806 },
+    { name: "St. Andrew", lat: 43.6476, lng: -79.3843 },
+    { name: "Queen", lat: 43.6524, lng: -79.3791 },
+    { name: "Dundas", lat: 43.6565, lng: -79.3805 },
+    { name: "College", lat: 43.6611, lng: -79.3831 },
+    { name: "Wellesley", lat: 43.6654, lng: -79.3835 },
+    { name: "Bloor-Yonge", lat: 43.6707, lng: -79.3863 },
+    { name: "Rosedale", lat: 43.6777, lng: -79.3880 },
+    { name: "Summerhill", lat: 43.6823, lng: -79.3905 },
+    { name: "St. Clair", lat: 43.6868, lng: -79.3932 },
+    { name: "Davisville", lat: 43.6977, lng: -79.3974 },
+    { name: "Eglinton", lat: 43.7067, lng: -79.3985 },
+    { name: "Lawrence", lat: 43.7254, lng: -79.4016 },
+    { name: "York Mills", lat: 43.7456, lng: -79.4076 },
+    { name: "Sheppard-Yonge", lat: 43.7614, lng: -79.4107 },
+    { name: "North York Centre", lat: 43.7679, lng: -79.4141 },
+    { name: "Finch", lat: 43.7806, lng: -79.4149 }
+];
+
+// Color palette for different clinic groups
+const clinicColors = {
+    'mount-sinai': '#e74c3c',
+    'repromed': '#3498db',
+    'trio': '#2ecc71',
+    'one-fertility': '#f39c12',
+    'create': '#9b59b6',
+    'default': '#95a5a6'
+};
+
+// Load clinics data from JSON file
+async function loadClinicsData() {
     try {
-        const response = await fetch('cities.json');
+        const response = await fetch('clinics.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        cities = await response.json();
+        clinics = await response.json();
         initializeMap();
         updateStats();
     } catch (error) {
-        console.error('Error loading cities data:', error);
-        showError('Failed to load cities data. Please ensure cities.json file exists and is accessible.');
+        console.error('Error loading clinics data:', error);
+        showError('Failed to load clinics data. Please ensure clinics.json file exists and is accessible.');
     }
 }
 
@@ -41,46 +93,47 @@ function showError(message) {
 
 // Calculate and update statistics
 function updateStats() {
-    const totalCases = cities.reduce((sum, city) => sum + city.cases, 0);
-    const activeLocations = cities.length;
+    const totalPhysicians = clinics.reduce((sum, clinic) => sum + clinic.physicians, 0);
+    const totalLocations = clinics.length;
     
-    // Calculate GTA cases (includes Toronto, Hamilton, Newmarket, Mississauga)
-    const gtaCases = cities
-        .filter(city => city.region === "GTA")
-        .reduce((sum, city) => sum + city.cases, 0);
-    const gtaPercentage = Math.round((gtaCases / totalCases) * 100);
+    // Count unique clinic groups
+    const uniqueGroups = new Set(clinics.map(c => c.clinicGroup));
+    const totalClinics = uniqueGroups.size;
     
-    // Calculate SickKids cases
-    const sickKidsCity = cities.find(city => city.name.includes("SickKids"));
-    const sickKidsPercentage = sickKidsCity ? 
-        Math.round((sickKidsCity.cases / totalCases) * 100) : 0;
+    // Find largest clinic by physicians
+    const largestClinic = clinics.reduce((max, clinic) => 
+        clinic.physicians > max.physicians ? clinic : max
+    );
     
     // Update DOM elements
-    document.getElementById('total-cases').textContent = totalCases;
-    document.getElementById('active-locations').textContent = activeLocations;
-    document.getElementById('gta-percentage').textContent = `${gtaPercentage}%`;
-    document.getElementById('sickkids-percentage').textContent = `${sickKidsPercentage}%`;
+    document.getElementById('total-physicians').textContent = totalPhysicians;
+    document.getElementById('total-locations').textContent = totalLocations;
+    document.getElementById('total-clinics').textContent = totalClinics;
+    document.getElementById('largest-clinic').textContent = largestClinic.name;
 }
 
 // Initialize the map
 function initializeMap() {
-    const map = L.map('map').setView([44.0, -79.5], 7);
+    const map = L.map('map').setView([43.7, -79.4], 11);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Calculate total cases dynamically
-    const totalCases = cities.reduce((sum, city) => sum + city.cases, 0);
+    // Draw TTC Line 1
+    drawTTCLine1(map);
 
-    function createCustomMarker(city) {
-        const markerClass = `marker-${city.type}`;
-        const markerSize = city.type === 'high' ? [50, 50] : 
-                          city.type === 'medium' ? [35, 35] : [25, 25];
+    // Calculate total physicians dynamically
+    const totalPhysicians = clinics.reduce((sum, clinic) => sum + clinic.physicians, 0);
+
+    function createCustomMarker(clinic) {
+        const color = clinicColors[clinic.clinicGroup] || clinicColors['default'];
+        const markerSize = clinic.type === 'high' ? [50, 50] : 
+                          clinic.type === 'medium' ? [35, 35] : [25, 25];
         
         const icon = L.divIcon({
             className: 'custom-marker',
-            html: `<div class="custom-marker ${markerClass}">${city.cases}</div>`,
+            html: `<div class="custom-marker" style="background-color: ${color}; width: ${markerSize[0]}px; height: ${markerSize[1]}px;">${clinic.physicians}</div>`,
             iconSize: markerSize,
             iconAnchor: [markerSize[0]/2, markerSize[1]/2],
             popupAnchor: [0, -markerSize[1]/2]
@@ -94,19 +147,20 @@ function initializeMap() {
         map.invalidateSize();
     }, 100);
 
-    // Add markers for each city
-    cities.forEach(city => {
-        const percentage = ((city.cases / totalCases) * 100).toFixed(1);
+    // Add markers for each clinic
+    clinics.forEach(clinic => {
+        const percentage = ((clinic.physicians / totalPhysicians) * 100).toFixed(1);
         
-        const marker = L.marker([city.lat, city.lng], {
-            icon: createCustomMarker(city)
+        const marker = L.marker([clinic.lat, clinic.lng], {
+            icon: createCustomMarker(clinic)
         }).addTo(map);
 
         // Create popup content
         const popupContent = `
             <div class="custom-popup">
-                <div class="popup-title">${city.name}</div>
-                <div class="popup-cases">Cases: ${city.cases}</div>
+                <div class="popup-title">${clinic.name}</div>
+                <div class="popup-address">${clinic.address}</div>
+                <div class="popup-physicians">Physicians: ${clinic.physicians}</div>
                 <div class="popup-share">Share: ${percentage}% of total</div>
             </div>
         `;
@@ -115,15 +169,83 @@ function initializeMap() {
     });
 
     // Fit map to show all markers with proper bounds
-    const group = new L.featureGroup(cities.map(city => 
-        L.marker([city.lat, city.lng])
+    const group = new L.featureGroup(clinics.map(clinic => 
+        L.marker([clinic.lat, clinic.lng])
     ));
     
     // Set bounds with padding after a brief delay to ensure markers are rendered
     setTimeout(() => {
         map.fitBounds(group.getBounds().pad(0.15));
     }, 200);
+    
+    // Add legend for clinic groups
+    addClinicLegend(map);
+}
+
+// Draw TTC Line 1 on the map
+function drawTTCLine1(map) {
+    // Create array of coordinates for the line
+    const lineCoordinates = ttcLine1Stations.map(station => [station.lat, station.lng]);
+    
+    // Draw the line
+    const ttcLine = L.polyline(lineCoordinates, {
+        color: '#FFD700',
+        weight: 4,
+        opacity: 0.7,
+        smoothFactor: 1
+    }).addTo(map);
+    
+    // Add station markers (small circles)
+    ttcLine1Stations.forEach(station => {
+        L.circleMarker([station.lat, station.lng], {
+            radius: 4,
+            fillColor: '#FFD700',
+            color: '#333',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        }).addTo(map).bindPopup(`<b>TTC Line 1</b><br>${station.name}`);
+    });
+}
+
+// Add legend for clinic groups
+function addClinicLegend(map) {
+    const legend = L.control({ position: 'bottomright' });
+    
+    legend.onAdd = function(map) {
+        const div = L.DomUtil.create('div', 'info legend');
+        
+        // Get unique clinic groups from data
+        const groups = [...new Set(clinics.map(c => c.clinicGroup))];
+        
+        div.innerHTML = '<h4>Clinic Networks</h4>';
+        
+        groups.forEach(group => {
+            const color = clinicColors[group] || clinicColors['default'];
+            const displayName = group.split('-').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+            
+            div.innerHTML += `
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: ${color}"></span>
+                    <span>${displayName}</span>
+                </div>
+            `;
+        });
+        
+        div.innerHTML += `
+            <div class="legend-item" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
+                <span class="legend-color" style="background-color: #FFD700; border-radius: 0; width: 20px;"></span>
+                <span>TTC Line 1</span>
+            </div>
+        `;
+        
+        return div;
+    };
+    
+    legend.addTo(map);
 }
 
 // Load data and initialize when page loads
-loadCitiesData();
+loadClinicsData();

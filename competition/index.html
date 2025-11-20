@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTA Fertility - Clinics MAP</title>
+    <title>GTA Fertility Clinics MAP</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
@@ -12,7 +12,27 @@
 </head>
 <body>
     <div class="container">
-        <h1>GTA Fertility - Clinics MAP</h1>
+        <h1>GTA Fertility Clinics MAP</h1>
+        <p class="subtitle">Fertility Clinic Locations & Physician Distribution</p>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-physicians">0</div>
+                <div class="stat-label">Total Physicians</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-locations">0</div>
+                <div class="stat-label">Clinic Locations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-clinics">0</div>
+                <div class="stat-label">Clinic Networks</div>
+            </div>
+            <div class="stat-card stat-card-wide">
+                <div class="stat-number" style="font-size: 1.2em;" id="largest-clinic">-</div>
+                <div class="stat-label">Largest Location</div>
+            </div>
+        </div>
         
         <div id="map"></div>
         
