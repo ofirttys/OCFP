@@ -163,12 +163,21 @@ function showError(message) {
 function initializeMap() {
     const map = L.map('map').setView([43.7, -79.4], 11);
 
+    // Option 1: Standard OpenStreetMap (current)
+    // Shows roads but they're subtle
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
-
-    // Draw highways first (so they appear below other elements)
-    drawHighways(map);
+    
+    // Option 2: Transport layer - uncomment to use (shows transit and major roads more prominently)
+    // L.tileLayer('https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=YOUR_API_KEY', {
+    //     attribution: '© Thunderforest, © OpenStreetMap contributors'
+    // }).addTo(map);
+    
+    // Option 3: OpenTopoMap - shows terrain and roads clearly
+    // L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    //     attribution: '© OpenTopoMap, © OpenStreetMap contributors'
+    // }).addTo(map);
     
     // Draw TTC Line 1
     drawTTCLine1(map);
@@ -294,69 +303,6 @@ function drawTTCLine1(map) {
 }
 
 // Draw major highways on the map
-function drawHighways(map) {
-    // Highway 401 - make it very visible
-    const hw401 = L.polyline(highway401, {
-        color: '#e74c3c',
-        weight: 6,
-        opacity: 0.7,
-        smoothFactor: 1,
-        dashArray: '15, 10'
-    }).addTo(map);
-    
-    // Add white outline for 401
-    L.polyline(highway401, {
-        color: '#ffffff',
-        weight: 8,
-        opacity: 0.4,
-        smoothFactor: 1,
-        dashArray: '15, 10'
-    }).addTo(map);
-    
-    hw401.bringToFront();
-    hw401.bindPopup('<b>Highway 401</b><br>Major East-West Highway');
-    
-    // Highway 404/DVP
-    const hw404 = L.polyline(highway404DVP, {
-        color: '#3498db',
-        weight: 5,
-        opacity: 0.7,
-        smoothFactor: 1,
-        dashArray: '15, 10'
-    }).addTo(map);
-    
-    L.polyline(highway404DVP, {
-        color: '#ffffff',
-        weight: 7,
-        opacity: 0.4,
-        smoothFactor: 1,
-        dashArray: '15, 10'
-    }).addTo(map);
-    
-    hw404.bringToFront();
-    hw404.bindPopup('<b>Highway 404 / Don Valley Parkway</b><br>North-South Highway');
-    
-    // Gardiner Expressway
-    const gardiner = L.polyline(gardinerExpressway, {
-        color: '#f39c12',
-        weight: 5,
-        opacity: 0.7,
-        smoothFactor: 1,
-        dashArray: '15, 10'
-    }).addTo(map);
-    
-    L.polyline(gardinerExpressway, {
-        color: '#ffffff',
-        weight: 7,
-        opacity: 0.4,
-        smoothFactor: 1,
-        dashArray: '15, 10'
-    }).addTo(map);
-    
-    gardiner.bringToFront();
-    gardiner.bindPopup('<b>Gardiner Expressway</b><br>Lakefront Highway');
-}
-
 // Add legend for clinic groups
 function addClinicLegend(map) {
     const legend = L.control({ position: 'bottomright' });
@@ -387,18 +333,6 @@ function addClinicLegend(map) {
             <div class="legend-item" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
                 <span class="legend-color" style="background-color: #FFD700; border-radius: 0; width: 20px;"></span>
                 <span>TTC Line 1</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color" style="background-color: #e74c3c; border-radius: 0; width: 20px; height: 4px;"></span>
-                <span>Highway 401</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color" style="background-color: #3498db; border-radius: 0; width: 20px; height: 4px;"></span>
-                <span>Highway 404/DVP</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color" style="background-color: #f39c12; border-radius: 0; width: 20px; height: 4px;"></span>
-                <span>Gardiner Expressway</span>
             </div>
         `;
         
