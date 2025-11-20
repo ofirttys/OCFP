@@ -183,8 +183,8 @@ function initializeMap() {
         })
     };
     
-    // Add the default layer (Standard OSM)
-    baseLayers["Standard OpenStreetMap"].addTo(map);
+    // Add the default layer (CartoDB Voyager)
+    baseLayers["CartoDB Voyager (Clean & Modern)"].addTo(map);
     
     // Add layer control (top-right corner) so user can switch between map styles
     L.control.layers(baseLayers).addTo(map);
@@ -195,22 +195,6 @@ function initializeMap() {
     // Calculate total physicians dynamically
     const totalPhysicians = clinics.reduce((sum, clinic) => sum + clinic.physicians, 0);
 
-    function createCustomMarker(clinic) {
-        const color = clinicColors[clinic.clinicGroup] || clinicColors['default'];
-        // Uniform size for all markers - same as TTC stations
-        const markerSize = [24, 24];
-        
-        const icon = L.divIcon({
-            className: 'custom-marker',
-            html: `<div class="custom-marker" style="background-color: ${color}; width: ${markerSize[0]}px; height: ${markerSize[1]}px;"></div>`,
-            iconSize: markerSize,
-            iconAnchor: [markerSize[0]/2, markerSize[1]/2],
-            popupAnchor: [0, -markerSize[1]/2]
-        });
-
-        return icon;
-    }
-
     // Force map to invalidate size and reposition markers correctly
     setTimeout(() => {
         map.invalidateSize();
@@ -219,9 +203,16 @@ function initializeMap() {
     // Add markers for each clinic
     clinics.forEach(clinic => {
         const percentage = ((clinic.physicians / totalPhysicians) * 100).toFixed(1);
+        const color = clinicColors[clinic.clinicGroup] || clinicColors['default'];
         
-        const marker = L.marker([clinic.lat, clinic.lng], {
-            icon: createCustomMarker(clinic)
+        // Use circle markers like TTC stations
+        const marker = L.circleMarker([clinic.lat, clinic.lng], {
+            radius: 6,
+            fillColor: color,
+            color: '#333',
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.9
         }).addTo(map);
 
         // Create popup content
