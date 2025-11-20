@@ -1,4 +1,5 @@
 let clinics = [];
+// Version: 2024-11-20 - Fixed station order, uniform markers, removed stats
 
 // TTC Line 1 (Yonge-University) station coordinates
 const ttcLine1Stations = [
@@ -109,7 +110,6 @@ async function loadClinicsData() {
         await Promise.all(geocodePromises);
         
         initializeMap();
-        updateStats();
     } catch (error) {
         console.error('Error loading clinics data:', error);
         console.error('Error type:', error.name);
@@ -156,26 +156,8 @@ function showError(message) {
     `;
 }
 
-// Calculate and update statistics
-function updateStats() {
-    const totalPhysicians = clinics.reduce((sum, clinic) => sum + clinic.physicians, 0);
-    const totalLocations = clinics.length;
-    
-    // Count unique clinic groups
-    const uniqueGroups = new Set(clinics.map(c => c.clinicGroup));
-    const totalClinics = uniqueGroups.size;
-    
-    // Find largest clinic by physicians
-    const largestClinic = clinics.reduce((max, clinic) => 
-        clinic.physicians > max.physicians ? clinic : max
-    );
-    
-    // Update DOM elements
-    document.getElementById('total-physicians').textContent = totalPhysicians;
-    document.getElementById('total-locations').textContent = totalLocations;
-    document.getElementById('total-clinics').textContent = totalClinics;
-    document.getElementById('largest-clinic').textContent = largestClinic.name;
-}
+// Calculate and update statistics - REMOVED (not needed)
+// function updateStats() { ... }
 
 // Initialize the map
 function initializeMap() {
@@ -196,12 +178,12 @@ function initializeMap() {
 
     function createCustomMarker(clinic) {
         const color = clinicColors[clinic.clinicGroup] || clinicColors['default'];
-        const markerSize = clinic.type === 'high' ? [50, 50] : 
-                          clinic.type === 'medium' ? [35, 35] : [25, 25];
+        // Uniform size for all markers - same as TTC stations
+        const markerSize = [24, 24];
         
         const icon = L.divIcon({
             className: 'custom-marker',
-            html: `<div class="custom-marker" style="background-color: ${color}; width: ${markerSize[0]}px; height: ${markerSize[1]}px;">${clinic.physicians}</div>`,
+            html: `<div class="custom-marker" style="background-color: ${color}; width: ${markerSize[0]}px; height: ${markerSize[1]}px;"></div>`,
             iconSize: markerSize,
             iconAnchor: [markerSize[0]/2, markerSize[1]/2],
             popupAnchor: [0, -markerSize[1]/2]
