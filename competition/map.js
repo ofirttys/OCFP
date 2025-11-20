@@ -22,9 +22,9 @@ const ttcLine1Stations = [
     { name: "Queen's Park", lat: 43.6660, lng: -79.3906 },
     { name: "St. Patrick", lat: 43.6547, lng: -79.3888 },
     { name: "Osgoode", lat: 43.6507, lng: -79.3869 },
-    { name: "King", lat: 43.6491, lng: -79.3779 },
-    { name: "Union", lat: 43.6453, lng: -79.3806 },
     { name: "St. Andrew", lat: 43.6476, lng: -79.3843 },
+    { name: "Union", lat: 43.6453, lng: -79.3806 },
+    { name: "King", lat: 43.6491, lng: -79.3779 },
     { name: "Queen", lat: 43.6524, lng: -79.3791 },
     { name: "Dundas", lat: 43.6565, lng: -79.3805 },
     { name: "College", lat: 43.6611, lng: -79.3831 },
@@ -313,32 +313,66 @@ function drawTTCLine1(map) {
 
 // Draw major highways on the map
 function drawHighways(map) {
-    // Highway 401
-    L.polyline(highway401, {
-        color: '#2c3e50',
-        weight: 5,
-        opacity: 0.6,
+    // Highway 401 - make it very visible
+    const hw401 = L.polyline(highway401, {
+        color: '#e74c3c',
+        weight: 6,
+        opacity: 0.7,
         smoothFactor: 1,
-        dashArray: '10, 10'
-    }).addTo(map).bindPopup('<b>Highway 401</b>');
+        dashArray: '15, 10'
+    }).addTo(map);
+    
+    // Add white outline for 401
+    L.polyline(highway401, {
+        color: '#ffffff',
+        weight: 8,
+        opacity: 0.4,
+        smoothFactor: 1,
+        dashArray: '15, 10'
+    }).addTo(map);
+    
+    hw401.bringToFront();
+    hw401.bindPopup('<b>Highway 401</b><br>Major East-West Highway');
     
     // Highway 404/DVP
-    L.polyline(highway404DVP, {
-        color: '#2c3e50',
-        weight: 4,
-        opacity: 0.6,
+    const hw404 = L.polyline(highway404DVP, {
+        color: '#3498db',
+        weight: 5,
+        opacity: 0.7,
         smoothFactor: 1,
-        dashArray: '10, 10'
-    }).addTo(map).bindPopup('<b>Highway 404 / Don Valley Parkway</b>');
+        dashArray: '15, 10'
+    }).addTo(map);
+    
+    L.polyline(highway404DVP, {
+        color: '#ffffff',
+        weight: 7,
+        opacity: 0.4,
+        smoothFactor: 1,
+        dashArray: '15, 10'
+    }).addTo(map);
+    
+    hw404.bringToFront();
+    hw404.bindPopup('<b>Highway 404 / Don Valley Parkway</b><br>North-South Highway');
     
     // Gardiner Expressway
-    L.polyline(gardinerExpressway, {
-        color: '#2c3e50',
-        weight: 4,
-        opacity: 0.6,
+    const gardiner = L.polyline(gardinerExpressway, {
+        color: '#f39c12',
+        weight: 5,
+        opacity: 0.7,
         smoothFactor: 1,
-        dashArray: '10, 10'
-    }).addTo(map).bindPopup('<b>Gardiner Expressway</b>');
+        dashArray: '15, 10'
+    }).addTo(map);
+    
+    L.polyline(gardinerExpressway, {
+        color: '#ffffff',
+        weight: 7,
+        opacity: 0.4,
+        smoothFactor: 1,
+        dashArray: '15, 10'
+    }).addTo(map);
+    
+    gardiner.bringToFront();
+    gardiner.bindPopup('<b>Gardiner Expressway</b><br>Lakefront Highway');
 }
 
 // Add legend for clinic groups
@@ -373,8 +407,16 @@ function addClinicLegend(map) {
                 <span>TTC Line 1</span>
             </div>
             <div class="legend-item">
-                <span class="legend-color" style="background: repeating-linear-gradient(90deg, #2c3e50 0px, #2c3e50 10px, transparent 10px, transparent 20px); border-radius: 0; width: 20px; height: 4px;"></span>
-                <span>Major Highways</span>
+                <span class="legend-color" style="background-color: #e74c3c; border-radius: 0; width: 20px; height: 4px;"></span>
+                <span>Highway 401</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #3498db; border-radius: 0; width: 20px; height: 4px;"></span>
+                <span>Highway 404/DVP</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #f39c12; border-radius: 0; width: 20px; height: 4px;"></span>
+                <span>Gardiner Expressway</span>
             </div>
         `;
         
