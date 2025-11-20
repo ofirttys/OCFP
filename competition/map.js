@@ -185,6 +185,9 @@ function initializeMap() {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
+    // Draw highways first (so they appear below other elements)
+    drawHighways(map);
+    
     // Draw TTC Line 1
     drawTTCLine1(map);
 
@@ -247,30 +250,95 @@ function initializeMap() {
     addClinicLegend(map);
 }
 
+// Highway 401 coordinates (approximate path through GTA)
+const highway401 = [
+    [43.7850, -79.6200], [43.7800, -79.5500], [43.7750, -79.4800],
+    [43.7700, -79.4200], [43.7650, -79.3600], [43.7600, -79.3000],
+    [43.7550, -79.2400], [43.7500, -79.1800]
+];
+
+// Highway 404/DVP coordinates
+const highway404DVP = [
+    [43.8800, -79.4650], [43.8400, -79.4600], [43.8000, -79.4550],
+    [43.7600, -79.4500], [43.7200, -79.4100], [43.7000, -79.3950],
+    [43.6800, -79.3800], [43.6600, -79.3700], [43.6500, -79.3650]
+];
+
+// Gardiner Expressway coordinates
+const gardinerExpressway = [
+    [43.6350, -79.6400], [43.6380, -79.5800], [43.6400, -79.5200],
+    [43.6420, -79.4600], [43.6440, -79.4000], [43.6460, -79.3400],
+    [43.6480, -79.2800]
+];
+
 // Draw TTC Line 1 on the map
 function drawTTCLine1(map) {
     // Create array of coordinates for the line
     const lineCoordinates = ttcLine1Stations.map(station => [station.lat, station.lng]);
     
-    // Draw the line
+    // Draw the main subway line with enhanced styling
     const ttcLine = L.polyline(lineCoordinates, {
         color: '#FFD700',
-        weight: 4,
-        opacity: 0.7,
+        weight: 6,
+        opacity: 0.9,
+        smoothFactor: 1,
+        className: 'ttc-line'
+    }).addTo(map);
+    
+    // Add a white border/outline effect
+    const ttcLineOutline = L.polyline(lineCoordinates, {
+        color: '#FFFFFF',
+        weight: 8,
+        opacity: 0.6,
         smoothFactor: 1
     }).addTo(map);
     
-    // Add station markers (small circles)
+    // Bring the main line to front
+    ttcLine.bringToFront();
+    
+    // Add station markers (small circles) - optional, can be removed
     ttcLine1Stations.forEach(station => {
         L.circleMarker([station.lat, station.lng], {
-            radius: 4,
+            radius: 3,
             fillColor: '#FFD700',
             color: '#333',
             weight: 1,
             opacity: 1,
-            fillOpacity: 0.8
+            fillOpacity: 0.9
         }).addTo(map).bindPopup(`<b>TTC Line 1</b><br>${station.name}`);
     });
+    
+    ttcLine.bindPopup('<b>TTC Line 1</b><br>Yonge-University Subway Line');
+}
+
+// Draw major highways on the map
+function drawHighways(map) {
+    // Highway 401
+    L.polyline(highway401, {
+        color: '#2c3e50',
+        weight: 5,
+        opacity: 0.6,
+        smoothFactor: 1,
+        dashArray: '10, 10'
+    }).addTo(map).bindPopup('<b>Highway 401</b>');
+    
+    // Highway 404/DVP
+    L.polyline(highway404DVP, {
+        color: '#2c3e50',
+        weight: 4,
+        opacity: 0.6,
+        smoothFactor: 1,
+        dashArray: '10, 10'
+    }).addTo(map).bindPopup('<b>Highway 404 / Don Valley Parkway</b>');
+    
+    // Gardiner Expressway
+    L.polyline(gardinerExpressway, {
+        color: '#2c3e50',
+        weight: 4,
+        opacity: 0.6,
+        smoothFactor: 1,
+        dashArray: '10, 10'
+    }).addTo(map).bindPopup('<b>Gardiner Expressway</b>');
 }
 
 // Add legend for clinic groups
@@ -303,6 +371,10 @@ function addClinicLegend(map) {
             <div class="legend-item" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
                 <span class="legend-color" style="background-color: #FFD700; border-radius: 0; width: 20px;"></span>
                 <span>TTC Line 1</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: repeating-linear-gradient(90deg, #2c3e50 0px, #2c3e50 10px, transparent 10px, transparent 20px); border-radius: 0; width: 20px; height: 4px;"></span>
+                <span>Major Highways</span>
             </div>
         `;
         
