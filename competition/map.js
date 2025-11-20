@@ -59,10 +59,19 @@ const clinicColors = {
 // Geocode an address to lat/lng using Nominatim (OpenStreetMap)
 async function geocodeAddress(address) {
     try {
-        const response = await fetch(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`
+        // Try with original address first
+        let response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address + ", Canada")}&limit=1`
         );
-        const data = await response.json();
+        let data = await response.json();
+        
+        // If no results, try without extra formatting
+        if (!data || data.length === 0) {
+            response = await fetch(
+                `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`
+            );
+            data = await response.json();
+        }
         
         if (data && data.length > 0) {
             return {

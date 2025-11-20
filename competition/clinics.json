@@ -2,26 +2,20 @@
     {
         "name": "Mount Sinai Fertility - Main",
         "address": "250 Dundas Street West, Toronto, ON",
-        "lat": 43.6565,
-        "lng": -79.3876,
         "physicians": 8,
         "clinicGroup": "mount-sinai",
         "type": "high"
     },
     {
         "name": "Mount Sinai Fertility - Vaughan",
-        "address": "9600 Bathurst St, Maple, ON",
-        "lat": 43.8539,
-        "lng": -79.4622,
+        "address": "9600 Bathurst Street, Maple, ON",
         "physicians": 8,
         "clinicGroup": "mount-sinai",
         "type": "high"
     },
     {
         "name": "Mount Sinai Fertility - Mississauga",
-        "address": "800 Southdown Rd, Mississauga, ON",
-        "lat": 43.5070,
-        "lng": -79.6253,
+        "address": "800 Southdown Road, Mississauga, ON",
         "physicians": 8,
         "clinicGroup": "mount-sinai",
         "type": "high"
@@ -29,8 +23,6 @@
     {
         "name": "Mount Sinai Fertility - North York",
         "address": "2 Sheppard Avenue East, Toronto, ON",
-        "lat": 43.7614,
-        "lng": -79.4116,
         "physicians": 8,
         "clinicGroup": "mount-sinai",
         "type": "medium"
@@ -38,17 +30,13 @@
     {
         "name": "TRIO Fertility - Toronto",
         "address": "655 Bay Street, Toronto, ON",
-        "lat": 43.6625,
-        "lng": -79.3855,
         "physicians": 15,
         "clinicGroup": "trio",
         "type": "medium"
     },
     {
         "name": "TRIO Fertility - North York",
-        "address": "36 York Mills Rd, North York, ON",
-        "lat": 43.7456,
-        "lng": -79.4062,
+        "address": "36 York Mills Road, North York, ON",
         "physicians": 15,
         "clinicGroup": "trio",
         "type": "medium"
@@ -56,17 +44,13 @@
     {
         "name": "TRIO Fertility - Thornhill",
         "address": "7330 Yonge Street, Thornhill, ON",
-        "lat": 43.8291,
-        "lng": -79.4275,
         "physicians": 15,
         "clinicGroup": "trio",
         "type": "medium"
     },
     {
         "name": "TRIO Fertility - Burlington",
-        "address": "3115 Harvester Rd, Burlington, ON",
-        "lat": 43.4039,
-        "lng": -79.7925,
+        "address": "3115 Harvester Road, Burlington, ON",
         "physicians": 15,
         "clinicGroup": "trio",
         "type": "medium"
@@ -74,89 +58,69 @@
     {
         "name": "Create Fertility",
         "address": "790 Bay Street, Toronto, ON",
-        "lat": 43.6680,
-        "lng": -79.3870,
         "physicians": 5,
         "clinicGroup": "create",
         "type": "medium"
     },
     {
-        "name": "Hannam",
+        "name": "Hannam Fertility",
         "address": "160 Bloor Street East, Toronto, ON",
-        "lat": 43.6707,
-        "lng": -79.3863,
         "physicians": 6,
         "clinicGroup": "hannam",
         "type": "medium"
     },
     {
-        "name": "Anova - Toronto",
-        "address": "40 University Ave, Toronto, ON",
-        "lat": 43.6507,
-        "lng": -79.3869,
+        "name": "Anova Fertility - Toronto",
+        "address": "40 University Avenue, Toronto, ON",
         "physicians": 5,
         "clinicGroup": "anova",
         "type": "medium"
     },
     {
-        "name": "Anova - North York",
-        "address": "25 Sheppard Ave W, Toronto, ON",
-        "lat": 43.7489,
-        "lng": -79.4061,
+        "name": "Anova Fertility - North York",
+        "address": "25 Sheppard Avenue West, Toronto, ON",
         "physicians": 5,
         "clinicGroup": "anova",
         "type": "medium"
     },
     {
-        "name": "Twig - Midtown",
+        "name": "Twig Fertility - Midtown",
         "address": "313 Eglinton Avenue West, Toronto, ON",
-        "lat": 43.7070,
-        "lng": -79.4100,
         "physicians": 5,
         "clinicGroup": "twig",
         "type": "medium"
     },
     {
-        "name": "Twig - Downtown",
-        "address": "130 King St West, Toronto, ON",
-        "lat": 43.6476,
-        "lng": -79.3865,
+        "name": "Twig Fertility - Downtown",
+        "address": "130 King Street West, Toronto, ON",
         "physicians": 5,
         "clinicGroup": "twig",
         "type": "medium"
     },
     {
-        "name": "Pollin",
-        "address": "2360 Yonge St, Toronto, ON",
-        "lat": 43.7056,
-        "lng": -79.3982,
+        "name": "Pollin Fertility",
+        "address": "2360 Yonge Street, Toronto, ON",
         "physicians": 5,
         "clinicGroup": "pollin",
         "type": "medium"
     },
     {
-        "name": "Generation - Vaughan",
+        "name": "Generation Fertility - Vaughan",
         "address": "955 Major MacKenzie Drive West, Maple, ON",
-        "lat": 43.8467,
-        "lng": -79.5360,
         "physicians": 5,
         "clinicGroup": "generation",
         "type": "medium"
     },
     {
-        "name": "Generation - Toronto West",
+        "name": "Generation Fertility - Toronto West",
         "address": "56 Aberfoyle Crescent, Toronto, ON",
-        "lat": 43.6533,
-        "lng": -79.5019,
         "physicians": 5,
         "clinicGroup": "generation",
         "type": "medium"
     },
     {
-        "name": "Generation - Newmarket",
+        "name": "Generation Fertility - Newmarket",
         "address": "1111 Davis Drive East, Newmarket, ON",
-        "lat": 44.0592,
-        "lng": -79.4613,
         "physicians": 5,
         "clinicGroup": "generation",
         "type": "medium"
