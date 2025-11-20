@@ -52,19 +52,84 @@ const clinicColors = {
     'default': '#95a5a6'
 };
 
+// Geocode an address to lat/lng using Nominatim (OpenStreetMap)
+async function geocodeAddress(address) {
+    try {
+        const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`
+        );
+        const data = await response.json();
+        
+        if (data && data.length > 0) {
+            return {
+                lat: parseFloat(data[0].lat),
+                lng: parseFloat(data[0].lon)
+            };
+        }
+        return null;
+    } catch (error) {
+        console.error(`Error geocoding address: ${address}`, error);
+        return null;
+    }
+}
+
 // Load clinics data from JSON file
 async function loadClinicsData() {
     try {
+        console.log('Attempting to load clinics.json...');
+        console.log('Current URL:', window.location.href);
+        
         const response = await fetch('clinics.json');
+        console.log('Fetch response:', response);
+        
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         clinics = await response.json();
+        console.log('Loaded clinics data:', clinics);
+        
+        // Geocode any clinics that don't have lat/lng
+        const geocodePromises = clinics.map(async (clinic, index) => {
+            if (!clinic.lat || !clinic.lng) {
+                console.log(`Geocoding address for ${clinic.name}: ${clinic.address}`);
+                const coords = await geocodeAddress(clinic.address);
+                if (coords) {
+                    clinics[index].lat = coords.lat;
+                    clinics[index].lng = coords.lng;
+                    console.log(`✓ Geocoded ${clinic.name}:`, coords);
+                } else {
+                    console.warn(`✗ Failed to geocode ${clinic.name}`);
+                }
+                // Add delay to respect Nominatim usage policy (max 1 request per second)
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+        });
+        
+        await Promise.all(geocodePromises);
+        
         initializeMap();
         updateStats();
     } catch (error) {
         console.error('Error loading clinics data:', error);
-        showError('Failed to load clinics data. Please ensure clinics.json file exists and is accessible.');
+        console.error('Error type:', error.name);
+        console.error('Error message:', error.message);
+        
+        // Check if it's a CORS error
+        if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+            showError(`Failed to load clinics data. <br><br>
+                <strong>Common causes:</strong><br>
+                1. You're opening the file directly (file://) - Use a local web server instead<br>
+                2. The clinics.json file is not in the same folder as index.html<br><br>
+                <strong>Solutions:</strong><br>
+                • Use Python: <code>python -m http.server 8000</code><br>
+                • Use Node.js: <code>npx http-server</code><br>
+                • Use VS Code: Install "Live Server" extension<br><br>
+                Then open: <code>http://localhost:8000</code>`);
+        } else {
+            showError(`Failed to load clinics data: ${error.message}<br><br>
+                Check the browser console (F12) for more details.`);
+        }
     }
 }
 
