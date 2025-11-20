@@ -8,24 +8,22 @@
     },
     {
         "name": "Mount Sinai Fertility - Vaughan",
-        "address": "9600 Bathurst St, Maple, ON L6A 3Z8",
+        "address": "9600 Bathurst St, Maple, ON",
         "physicians": 8,
         "clinicGroup": "mount-sinai",
         "type": "high"
     },
     {
         "name": "Mount Sinai Fertility - Mississauga",
-        "address": "800 Southdown Rd Unit A4, Mississauga, ON L5J 2Y4",
+        "address": "800 Southdown Rd, Mississauga, ON",
         "physicians": 8,
         "clinicGroup": "mount-sinai",
         "type": "high"
     },
     {
-        "name": "Mount Sinai Fertility - North",
-        "address": "123 Example Street, North York, ON",
-        "lat": 43.7615,
-        "lng": -79.4110,
-        "physicians": 3,
+        "name": "Mount Sinai Fertility - North York",
+        "address": "2 Sheppard Avenue east, Toronto, ON",
+        "physicians": 8,
         "clinicGroup": "mount-sinai",
         "type": "medium"
     },
