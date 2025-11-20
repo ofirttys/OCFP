@@ -28,39 +28,102 @@
         "type": "medium"
     },
     {
-        "name": "ReproMed Fertility - Downtown",
-        "address": "456 Bay Street, Toronto, ON",
-        "lat": 43.6532,
-        "lng": -79.3832,
-        "physicians": 5,
-        "clinicGroup": "repromed",
-        "type": "medium"
-    },
-    {
         "name": "TRIO Fertility - Toronto",
         "address": "655 Bay Street, Toronto, ON",
-        "lat": 43.6625,
-        "lng": -79.3855,
-        "physicians": 6,
+        "physicians": 15,
         "clinicGroup": "trio",
         "type": "medium"
     },
     {
-        "name": "ONE Fertility - Mississauga",
-        "address": "2150 Burnhamthorpe Road West, Mississauga, ON",
-        "lat": 43.5890,
-        "lng": -79.6441,
-        "physicians": 4,
-        "clinicGroup": "one-fertility",
+        "name": "TRIO Fertility - North York",
+        "address": "36 York Mills Rd. North York, ON",
+        "physicians": 15,
+        "clinicGroup": "trio",
         "type": "medium"
     },
     {
-        "name": "Create Fertility - Toronto",
+        "name": "TRIO Fertility - Thornhill",
+        "address": "7330 Yonge Street, Thornhill, ON",
+        "physicians": 15,
+        "clinicGroup": "trio",
+        "type": "medium"
+    },
+    {
+        "name": "TRIO Fertility - Burlington",
+        "address": "3115 Harvester Rd. Burlington, ON",
+        "physicians": 15,
+        "clinicGroup": "trio",
+        "type": "medium"
+    },
+    {
+        "name": "Create Fertility",
         "address": "790 Bay Street, Toronto, ON",
-        "lat": 43.6680,
-        "lng": -79.3870,
-        "physicians": 3,
+        "physicians": 5,
         "clinicGroup": "create",
-        "type": "low"
-    }
+        "type": "medium"
+    },
+    {
+        "name": "Hannam",
+        "address": "160 Bloor Street East, Toronto, ON",
+        "physicians": 6,
+        "clinicGroup": "hannam",
+        "type": "medium"
+    },
+    {
+        "name": "Anova - Toronto",
+        "address": "40 University Ave., Toronto ON",
+        "physicians": 5,
+        "clinicGroup": "anova",
+        "type": "medium"
+    },
+    {
+        "name": "Anova - North York",
+        "address": "25 Sheppard Ave. W. Toronto, ON",
+        "physicians": 5,
+        "clinicGroup": "anova",
+        "type": "medium"
+    },
+    {
+        "name": "Twig - Midtown",
+        "address": "313 Eglinton Avenue West Toronto, Ontario",
+        "physicians": 5,
+        "clinicGroup": "twig",
+        "type": "medium"
+    },
+    {
+        "name": "Twig - Downtown",
+        "address": "130 King St. West, Toronto, ON",
+        "physicians": 5,
+        "clinicGroup": "twig",
+        "type": "medium"
+    },
+    {
+        "name": "Pollin",
+        "address": "2360 Yonge St., Toronto, ON",
+        "physicians": 5,
+        "clinicGroup": "pollin",
+        "type": "medium"
+    },
+    {
+        "name": "Generation - Vaughan",
+        "address": "955 Major MacKenzie Drive West, Maple ON",
+        "physicians": 5,
+        "clinicGroup": "generation",
+        "type": "medium"
+    },
+    {
+        "name": "Generation - Toronto West",
+        "address": "56 Aberfoyle Crescent, Toronto, ON",
+        "physicians": 5,
+        "clinicGroup": "generation",
+        "type": "medium"
+    },
+    {
+        "name": "Generation - Newmarket",
+        "address": "1111 Davis Drive East, Newmarket, ON",
+        "physicians": 5,
+        "clinicGroup": "generation",
+        "type": "medium"
+    },
+	
 ]

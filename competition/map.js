@@ -1,5 +1,5 @@
 let clinics = [];
-// Version: 2024-11-20b - Added future Line 1 extension, CartoDB Voyager default, circle markers
+// Version: 2024-11-20c - Updated clinic colors, removed future extension, CartoDB Voyager default
 
 // TTC Line 1 (Yonge-University) station coordinates
 const ttcLine1Stations = [
@@ -43,25 +43,16 @@ const ttcLine1Stations = [
     { name: "Finch", lat: 43.7806, lng: -79.4149 }
 ];
 
-// Future TTC Line 1 North Extension stations (after Finch)
-// Yonge North Subway Extension - Expected opening: 2030-2031
-const ttcLine1FutureNorth = [
-    { name: "Finch", lat: 43.7806, lng: -79.4149 },  // Connection point
-    { name: "Cummer", lat: 43.7978, lng: -79.4157 },
-    { name: "Steeles", lat: 43.8007, lng: -79.4177 },
-    { name: "Clark", lat: 43.8156, lng: -79.4202 },
-    { name: "Royal Orchard", lat: 43.8351, lng: -79.4247 },
-    { name: "Langstaff", lat: 43.8482, lng: -79.4295 },
-    { name: "Richmond Hill Centre", lat: 43.8652, lng: -79.4279 }
-];
-
 // Color palette for different clinic groups
 const clinicColors = {
-    'mount-sinai': '#e74c3c',
-    'repromed': '#3498db',
-    'trio': '#2ecc71',
-    'one-fertility': '#f39c12',
-    'create': '#9b59b6',
+    'mount-sinai': '#e74c3c',     // Red
+    'trio': '#3498db',            // Blue  
+    'create': '#2ecc71',          // Green
+    'hannam': '#f39c12',          // Orange
+    'anova': '#9b59b6',           // Purple
+    'twig': '#e91e63',            // Pink/Magenta
+    'pollin': '#00bcd4',          // Cyan/Turquoise
+    'generation': '#8bc34a',      // Light Green
     'default': '#95a5a6'
 };
 
@@ -203,9 +194,6 @@ function initializeMap() {
     
     // Draw TTC Line 1
     drawTTCLine1(map);
-    
-    // Draw future TTC Line 1 extension
-    drawTTCLine1Future(map);
 
     // Calculate total physicians dynamically
     const totalPhysicians = clinics.reduce((sum, clinic) => sum + clinic.physicians, 0);
@@ -319,47 +307,6 @@ function drawTTCLine1(map) {
 }
 
 // Draw future TTC Line 1 extension on the map
-function drawTTCLine1Future(map) {
-    // Create array of coordinates for the future line
-    const lineCoordinates = ttcLine1FutureNorth.map(station => [station.lat, station.lng]);
-    
-    // Draw the future subway line with different styling (dashed, lighter color)
-    const ttcLineFutureOutline = L.polyline(lineCoordinates, {
-        color: '#FFFFFF',
-        weight: 8,
-        opacity: 0.4,
-        smoothFactor: 1,
-        dashArray: '10, 10'
-    }).addTo(map);
-    
-    const ttcLineFuture = L.polyline(lineCoordinates, {
-        color: '#FFA500',  // Orange color for future extension
-        weight: 6,
-        opacity: 0.7,
-        smoothFactor: 1,
-        dashArray: '10, 10'  // Dashed to indicate "planned"
-    }).addTo(map);
-    
-    ttcLineFuture.bringToFront();
-    
-    // Add future station markers (different style)
-    ttcLine1FutureNorth.forEach(station => {
-        if (station.name !== "Finch") {  // Skip Finch as it's already shown
-            L.circleMarker([station.lat, station.lng], {
-                radius: 3,
-                fillColor: '#FFA500',
-                color: '#666',
-                weight: 1,
-                opacity: 0.7,
-                fillOpacity: 0.7
-            }).addTo(map).bindPopup(`<b>TTC Line 1 Future Extension</b><br>${station.name}<br><i>Expected: 2030-2031</i>`);
-        }
-    });
-    
-    ttcLineFuture.bindPopup('<b>TTC Line 1 Future Extension</b><br>Yonge North Subway Extension<br><i>Opening: 2030-2031</i>');
-}
-
-// Draw major highways on the map
 // Add legend for clinic groups
 function addClinicLegend(map) {
     const legend = L.control({ position: 'bottomright' });
@@ -390,10 +337,6 @@ function addClinicLegend(map) {
             <div class="legend-item" style="margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
                 <span class="legend-color" style="background-color: #FFD700; border-radius: 0; width: 20px;"></span>
                 <span>TTC Line 1</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color" style="background: repeating-linear-gradient(90deg, #FFA500 0px, #FFA500 5px, transparent 5px, transparent 10px); border-radius: 0; width: 20px; height: 4px;"></span>
-                <span>Line 1 Future (2030-31)</span>
             </div>
         `;
         
