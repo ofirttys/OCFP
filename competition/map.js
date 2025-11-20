@@ -1,5 +1,5 @@
 let clinics = [];
-// Version: 2024-11-20c - Updated clinic colors, removed future extension, CartoDB Voyager default
+// Version: 2024-11-20d - Fixed sequential geocoding to avoid rate limiting
 
 // TTC Line 1 (Yonge-University) station coordinates
 const ttcLine1Stations = [
@@ -102,24 +102,25 @@ async function loadClinicsData() {
         clinics = await response.json();
         console.log('Loaded clinics data:', clinics);
         
-        // Geocode any clinics that don't have lat/lng
-        const geocodePromises = clinics.map(async (clinic, index) => {
+        // Geocode any clinics that don't have lat/lng - ONE AT A TIME
+        for (let i = 0; i < clinics.length; i++) {
+            const clinic = clinics[i];
             if (!clinic.lat || !clinic.lng) {
                 console.log(`Geocoding address for ${clinic.name}: ${clinic.address}`);
                 const coords = await geocodeAddress(clinic.address);
                 if (coords) {
-                    clinics[index].lat = coords.lat;
-                    clinics[index].lng = coords.lng;
+                    clinics[i].lat = coords.lat;
+                    clinics[i].lng = coords.lng;
                     console.log(`✓ Geocoded ${clinic.name}:`, coords);
                 } else {
                     console.warn(`✗ Failed to geocode ${clinic.name}`);
                 }
-                // Add delay to respect Nominatim usage policy (max 1 request per second)
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                // Wait 1 second between requests to respect Nominatim usage policy
+                if (i < clinics.length - 1) {  // Don't wait after the last one
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
             }
-        });
-        
-        await Promise.all(geocodePromises);
+        }
         
         initializeMap();
     } catch (error) {
