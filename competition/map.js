@@ -163,21 +163,31 @@ function showError(message) {
 function initializeMap() {
     const map = L.map('map').setView([43.7, -79.4], 11);
 
-    // Option 1: Standard OpenStreetMap (current)
-    // Shows roads but they're subtle
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+    // Define different tile layer options
+    const baseLayers = {
+        "Standard OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }),
+        
+        "OpenTopoMap (Shows roads clearly)": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenTopoMap, © OpenStreetMap contributors',
+            maxZoom: 17
+        }),
+        
+        "CartoDB Voyager (Clean & Modern)": L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '© CARTO, © OpenStreetMap contributors'
+        }),
+        
+        "CartoDB Dark Matter": L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© CARTO, © OpenStreetMap contributors'
+        })
+    };
     
-    // Option 2: Transport layer - uncomment to use (shows transit and major roads more prominently)
-    // L.tileLayer('https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=YOUR_API_KEY', {
-    //     attribution: '© Thunderforest, © OpenStreetMap contributors'
-    // }).addTo(map);
+    // Add the default layer (Standard OSM)
+    baseLayers["Standard OpenStreetMap"].addTo(map);
     
-    // Option 3: OpenTopoMap - shows terrain and roads clearly
-    L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenTopoMap, © OpenStreetMap contributors'
-    }).addTo(map);
+    // Add layer control (top-right corner) so user can switch between map styles
+    L.control.layers(baseLayers).addTo(map);
     
     // Draw TTC Line 1
     drawTTCLine1(map);
