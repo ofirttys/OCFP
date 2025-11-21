@@ -3,14 +3,14 @@
         "name": "Mount Sinai Fertility - Main",
         "address": "250 Dundas Street West, Toronto, ON",
         "physicians": 8,
-        "clinicGroup": "mount-sinai",
+        "clinicGroup": "mount-sinai-fertility",
         "type": "high"
     },
     {
         "name": "Mount Sinai Fertility - Vaughan",
         "address": "9600 Bathurst Street, Maple, ON",
         "physicians": 8,
-        "clinicGroup": "mount-sinai",
+        "clinicGroup": "mount-sinai-fertility",
         "type": "high"
     },
     {

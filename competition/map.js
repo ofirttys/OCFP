@@ -45,9 +45,9 @@ const ttcLine1Stations = [
 
 // Color palette for different clinic groups
 const clinicColors = {
-    'mount-sinai': '#e74c3c',     // Red
-    'trio': '#3498db',            // Blue  
-    'create': '#2ecc71',          // Green
+    'mount-sinai-fertility': '#e74c3c',     // Red
+    'TRIO': '#3498db',            // Blue  
+    'CReATe': '#2ecc71',          // Green
 	'markham' : '#16a085',        // Teal
     'hannam': '#f39c12',          // Orange
     'anova': '#9b59b6',           // Purple
