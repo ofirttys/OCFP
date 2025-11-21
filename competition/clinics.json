@@ -17,7 +17,7 @@
         "name": "Mount Sinai Fertility - Mississauga",
         "address": "800 Southdown Road, Mississauga, ON",
         "physicians": 8,
-        "clinicGroup": "mount-sinai",
+        "clinicGroup": "mount-sinai-fertility",
         "type": "high"
     },
     {
@@ -31,35 +31,35 @@
         "name": "TRIO Fertility - Toronto",
         "address": "655 Bay Street, Toronto, ON",
         "physicians": 15,
-        "clinicGroup": "trio",
+        "clinicGroup": "TRIO",
         "type": "medium"
     },
     {
         "name": "TRIO Fertility - North York",
         "address": "36 York Mills Road, North York, ON",
         "physicians": 15,
-        "clinicGroup": "trio",
+        "clinicGroup": "TRIO",
         "type": "medium"
     },
     {
         "name": "TRIO Fertility - Thornhill",
         "address": "7330 Yonge Street, Thornhill, ON",
         "physicians": 15,
-        "clinicGroup": "trio",
+        "clinicGroup": "TRIO",
         "type": "medium"
     },
     {
         "name": "TRIO Fertility - Burlington",
         "address": "3115 Harvester Road, Burlington, ON",
         "physicians": 15,
-        "clinicGroup": "trio",
+        "clinicGroup": "TRIO",
         "type": "medium"
     },
     {
         "name": "Create Fertility",
         "address": "790 Bay Street, Toronto, ON",
         "physicians": 5,
-        "clinicGroup": "create",
+        "clinicGroup": "CReATe",
         "type": "medium"
     },
     {
@@ -69,6 +69,14 @@
         "clinicGroup": "hannam",
         "type": "medium"
     },
+    {
+        "name": "Markham Fertility Centre",
+        "address": "379 Church Street, Markham, Ontario ON",
+        "physicians": 5,
+        "clinicGroup": "markham",
+        "type": "medium"
+    },
+
     {
         "name": "Anova Fertility - Toronto",
         "address": "40 University Avenue, Toronto, ON",
