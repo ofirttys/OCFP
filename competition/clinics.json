@@ -107,6 +107,8 @@
     {
         "name": "Generation Fertility - Vaughan",
         "address": "955 Major MacKenzie Drive West, Maple, ON",
+		"lat": 43.864167,
+		"lng": -79.468611,
         "physicians": 5,
         "clinicGroup": "generation",
         "type": "medium"
