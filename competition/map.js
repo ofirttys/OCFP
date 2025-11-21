@@ -201,7 +201,7 @@ function initializeMap() {
     baseLayers["CartoDB Voyager (Clean & Modern)"].addTo(map);
     
     // Add layer control (top-right corner) so user can switch between map styles
-    L.control.layers(baseLayers).addTo(map);
+//    L.control.layers(baseLayers).addTo(map);
     
     // Draw TTC Line 1
     drawTTCLine1(map);

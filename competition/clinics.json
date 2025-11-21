@@ -63,20 +63,19 @@
         "type": "medium"
     },
     {
-        "name": "Hannam Fertility",
-        "address": "160 Bloor Street East, Toronto, ON",
-        "physicians": 6,
-        "clinicGroup": "hannam",
-        "type": "medium"
-    },
-    {
         "name": "Markham Fertility Centre",
         "address": "379 Church Street, Markham, Ontario ON",
         "physicians": 5,
         "clinicGroup": "markham",
         "type": "medium"
     },
-
+    {
+        "name": "Hannam Fertility",
+        "address": "160 Bloor Street East, Toronto, ON",
+        "physicians": 6,
+        "clinicGroup": "hannam",
+        "type": "medium"
+    },
     {
         "name": "Anova Fertility - Toronto",
         "address": "40 University Avenue, Toronto, ON",
