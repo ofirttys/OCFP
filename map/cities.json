@@ -3,7 +3,7 @@
         "name": "Toronto (SickKids)",
         "lat": 43.6575,
         "lng": -79.3875,
-        "cases": 13,
+        "cases": 17,
         "type": "high",
         "region": "GTA"
     },
@@ -19,7 +19,7 @@
         "name": "London",
         "lat": 42.9849,
         "lng": -81.2453,
-        "cases": 4,
+        "cases": 5,
         "type": "medium",
         "region": "Other"
     },
@@ -51,6 +51,14 @@
         "name": "Mississauga",
         "lat": 43.5890,
         "lng": -79.6441,
+        "cases": 1,
+        "type": "low",
+        "region": "GTA"
+    },
+    {
+        "name": "Barrie (RVH)",
+        "lat": 44.4147,
+        "lng": -79.6624,
         "cases": 1,
         "type": "low",
         "region": "GTA"
