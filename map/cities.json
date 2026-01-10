@@ -3,15 +3,15 @@
         "name": "Toronto (SickKids)",
         "lat": 43.6575,
         "lng": -79.3875,
-        "cases": 17,
+        "cases": 19,
         "type": "high",
         "region": "GTA"
     },
     {
-        "name": "Toronto (MSH)",
+        "name": "Toronto (MSH/WCH/PMH/UHN)",
         "lat": 43.6959,
         "lng": -79.4497,
-        "cases": 5,
+        "cases": 8,
         "type": "medium",
         "region": "GTA"
     },
@@ -27,7 +27,7 @@
         "name": "Ottawa",
         "lat": 45.4215,
         "lng": -75.6972,
-        "cases": 2,
+        "cases": 1,
         "type": "low",
         "region": "Other"
     },
@@ -40,12 +40,12 @@
         "region": "Other"
     },
     {
-        "name": "Newmarket",
-        "lat": 44.0592,
-        "lng": -79.4613,
+        "name": "Windsor",
+        "lat": 42.3015,
+        "lng": -82.9973,
         "cases": 1,
         "type": "low",
-        "region": "GTA"
+        "region": "Other"
     },
     {
         "name": "Mississauga",
@@ -59,14 +59,6 @@
         "name": "Barrie (RVH)",
         "lat": 44.4147,
         "lng": -79.6624,
-        "cases": 1,
-        "type": "low",
-        "region": "GTA"
-    },
-    {
-        "name": "Peterborough",
-        "lat": 44.3091,
-        "lng": -78.3197,
         "cases": 1,
         "type": "low",
         "region": "Other"
